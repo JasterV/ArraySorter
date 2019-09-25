@@ -110,13 +110,13 @@ public class IntArraySorter {
     private int partition(int start, int end) {
         //Choose a pivot and swap it to the end of the array.
         int pivot = choosePivotAndSwap(start, end);
-        int leftItem = 0, rightItem = end - 2;
+        int leftItem = start, rightItem = end - 2;
         int result;
         while (leftItem < rightItem) {
             if(array[leftItem] > pivot && array[rightItem] < pivot){
                 swap(leftItem, rightItem);
-                 leftItem += 1;
-                 rightItem -= 1;
+                leftItem += 1;
+                rightItem -= 1;
                 continue;
             }
             if(array[leftItem] < pivot){
@@ -129,9 +129,9 @@ public class IntArraySorter {
         if(array[leftItem] >= pivot){
             swap(leftItem, end - 1);
             result = leftItem;
-        }else if(array[rightItem] >= pivot){
-            swap(rightItem, end - 1);
-            result = rightItem;
+        }else{
+            swap(leftItem + 1, end - 1);
+            result = leftItem + 1;
         }
         return result;
     }
