@@ -111,14 +111,13 @@ public class IntArraySorter {
         //Choose a pivot and swap it to the end of the array.
         int pivot = choosePivotAndSwap(start, end);
         int leftItem = start, rightItem = end - 2;
-        int result;
         while (leftItem <= rightItem) {
-            if(array[leftItem] < pivot){ leftItem += 1; }
-            if(array[rightItem] > pivot){ rightItem -= 1; }
+            if(lessThanOrEqual(array[leftItem], pivot)){ leftItem += 1; }
+            if(!lessThanOrEqual(array[rightItem], pivot)){ rightItem -= 1; }
             if(leftItem > rightItem){
                 break;
             }
-            if(array[leftItem] > pivot && array[rightItem] < pivot){
+            if(!lessThanOrEqual(array[leftItem], pivot) && lessThanOrEqual(array[rightItem], pivot)){
                 swap(leftItem, rightItem);
                 leftItem += 1;
                 rightItem -= 1;
