@@ -112,18 +112,20 @@ public class IntArraySorter {
         int pivot = choosePivotAndSwap(start, end);
         int leftItem = start, rightItem = end - 2;
         int result;
-        while (leftItem < rightItem) {
-            if(lessThanOrEqual(array[leftItem], pivot)){ leftItem += 1; }
-            if(!lessThanOrEqual(array[rightItem], pivot)){ rightItem -= 1; }
-            if(!lessThanOrEqual(array[leftItem], pivot) && lessThanOrEqual(array[rightItem], pivot)){
+        while (leftItem <= rightItem) {
+            if(array[leftItem] < pivot){ leftItem += 1; }
+            if(array[rightItem] > pivot){ rightItem -= 1; }
+            if(leftItem > rightItem){
+                break;
+            }
+            if(array[leftItem] > pivot && array[rightItem] < pivot){
                 swap(leftItem, rightItem);
                 leftItem += 1;
                 rightItem -= 1;
             }
         }
-        result = array[leftItem] >= pivot ? leftItem : leftItem + 1;
-        swap(result, end - 1);
-        return result;
+        swap(leftItem, end - 1);
+        return leftItem;
     }
 
     private int itemFromLeft(int pivot, int start, int end) {
