@@ -67,13 +67,20 @@ public class IntArraySorter {
     }
 
     public void selectionSort() {
-        for (int i = 0; i < array.length - 1; ++i) {
-            int smallest = findTheSmallest(i);
-            if(smallest != i){
-                swap(i, smallest);
+
+        for (int i = 0; i < array.length + 1; i++) {
+            int min = i;
+            for (int j = 1 + i; j < array.length; j++) { // no tornar a veure els nombres mes petits
+                if (lessThanOrEqual(array[j], array[min])) { // cerca numero mes petit
+                    min = j;
+                }
+            }
+            if (min != i) { // sha modificat el index del nambre mes petit despres del for ?
+                swap(i, min);
             }
         }
     }
+
 
     public void quickSort(){
         int left = 0, right = array.length;
@@ -131,15 +138,7 @@ public class IntArraySorter {
             }
     }
 
-    private int findTheSmallest(int s) {
-        int smallest = s;
-        for (int actual = s + 1; actual < array.length; ++actual) {
-            if (lessThanOrEqual(array[actual], array[smallest])) {
-                smallest = actual;
-            }
-        }
-        return smallest;
-    }
+
 
     private int choosePivotPos(int left, int right){
         return left + new Random().nextInt(right - left);
