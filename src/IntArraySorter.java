@@ -103,6 +103,17 @@ public class IntArraySorter {
         }
     }
 
+    public void fisherYatesShuffle(int n) {
+        for (int i = 0; i < n; ++i) {
+            int j = new Random().nextInt(n);
+            int tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+        }
+    }
+
+    /*-----------------------AUXILIARY  METHODS------------------------------*/
+
     private int itemFromLeftPos(int pivot, int left, int right) {
         for (int i = left; i < right; ++i) {
             if (!lessThanOrEqual(array[i], pivot)) {
@@ -121,16 +132,6 @@ public class IntArraySorter {
         return left;
     }
 
-
-    public void fisherYatesShuffle(int n) {
-        for (int i = 0; i < n; ++i) {
-            int j = new Random().nextInt(n);
-            int tmp = array[i];
-            array[i] = array[j];
-            array[j] = tmp;
-        }
-    }
-
     private int findTheSmallest(int s) {
         int smallest = s;
         for (int actual = s + 1; actual < array.length; ++actual) {
@@ -146,7 +147,7 @@ public class IntArraySorter {
     }
 
 
-    /*-------------RADIX SORT--------------*/
+    /*--------------------------RADIX SORT------------------------------*/
 
     private boolean maxDigitLengthReached = false;
 
@@ -162,7 +163,6 @@ public class IntArraySorter {
         maxDigitLengthReached = true;
         int[] sorted = new int[array.length];
         int[] buckets = new int[10];
-
         count(buckets, n);
         if(!maxDigitLengthReached){
             sumCount(buckets);
@@ -172,12 +172,12 @@ public class IntArraySorter {
     }
 
     private void count(int[] buckets, int n){
-        for(int i = 0; i< array.length;++i) {
+        for(int i = 0; i < array.length;++i) {
             int value = array[i] / n;
+            int digit = value % 10;
             if (value > 0) {
                 maxDigitLengthReached = false;
             }
-            int digit = value % 10;
             buckets[digit] += 1;
         }
     }
@@ -202,6 +202,5 @@ public class IntArraySorter {
             array[i] = sorted[i];
         }
     }
-
 }
 
