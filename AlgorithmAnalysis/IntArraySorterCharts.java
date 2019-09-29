@@ -92,13 +92,9 @@ public class IntArraySorterCharts {
     }
 
     private void buildSorterAndShuffle(int shuffleLevel, int arrayLength) {
-        buildSorter(arrayLength);
-        sorter.fisherYatesShuffle(shuffleLevel);
-    }
-
-    private void buildSorter(int arrayLength){
         array = ArrayBuilder.buildArray(arrayLength);
         sorter = new IntArraySorter(array);
+        sorter.fisherYatesShuffle(shuffleLevel);
     }
 
     public static void main(String[] args) {
