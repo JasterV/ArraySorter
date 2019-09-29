@@ -1,5 +1,5 @@
 /**
- * This class helps us to build sorted arrays.
+ * This class helps us to build and copy arrays.
  */
 public class ArrayBuilder {
     /**
@@ -26,5 +26,16 @@ public class ArrayBuilder {
             array[array.length - 1 - i] = i;
         }
         return array;
+    }
+
+    /**
+     * Gets 2 arrays of the same length and copy one into the other.
+     * @param destination the array to store the source elements.
+     * @param original the array we want to copy.
+     */
+    public static void arrayCopy(int[] destination, int[] original){
+        for(int i = 0; i < original.length; ++i){
+            destination[i] = original[i];
+        }
     }
 }

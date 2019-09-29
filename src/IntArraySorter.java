@@ -68,14 +68,19 @@ public class IntArraySorter {
 
     public void selectionSort() {
         for (int i = 0; i < array.length - 1; ++i) {
-            int smallest = findTheSmallest(i);
-            if(smallest != i){
+            int smallest = i;
+            for (int s = i + 1; s < array.length; ++s) {
+                if (lessThanOrEqual(array[s], array[smallest])) {
+                    smallest = s;
+                }
+            }
+            if (smallest != i) {
                 swap(i, smallest);
             }
         }
     }
 
-    public void quickSort(){
+    public void quickSort() {
         int left = 0, right = array.length;
         quickSort(left, right);
     }
@@ -132,17 +137,7 @@ public class IntArraySorter {
         return left;
     }
 
-    private int findTheSmallest(int s) {
-        int smallest = s;
-        for (int actual = s + 1; actual < array.length; ++actual) {
-            if (lessThanOrEqual(array[actual], array[smallest])) {
-                smallest = actual;
-            }
-        }
-        return smallest;
-    }
-
-    private int choosePivotPos(int left, int right){
+    private int choosePivotPos(int left, int right) {
         return left + new Random().nextInt(right - left);
     }
 
@@ -151,28 +146,28 @@ public class IntArraySorter {
 
     private boolean maxDigitLengthReached = false;
 
-    public void radixSort(){
+    public void radixSort() {
         int n = 1;
-        while(!maxDigitLengthReached){
-            countSort(n);
+        while (!maxDigitLengthReached) {
+            int[] results = new int[array.length];
+            countSort(results, n);
+            ArrayBuilder.arrayCopy(array, results);
             n *= 10;
         }
     }
 
-    private void countSort(int n){
+    private void countSort(int[] results, int n) {
         maxDigitLengthReached = true;
-        int[] sorted = new int[array.length];
         int[] buckets = new int[10];
         count(buckets, n);
-        if(!maxDigitLengthReached){
+        if (!maxDigitLengthReached) {
             sumCount(buckets);
-            sort(buckets, sorted, n);
-            copyArray(sorted);
+            sort(buckets, results, n);
         }
     }
 
-    private void count(int[] buckets, int n){
-        for(int i = 0; i < array.length;++i) {
+    private void count(int[] buckets, int n) {
+        for (int i = 0; i < array.length; ++i) {
             int value = array[i] / n;
             int digit = value % 10;
             if (value > 0) {
@@ -182,24 +177,18 @@ public class IntArraySorter {
         }
     }
 
-    private void sumCount(int[] buckets){
-        for(int i = 1; i < buckets.length; ++i){
+    private void sumCount(int[] buckets) {
+        for (int i = 1; i < buckets.length; ++i) {
             buckets[i] += buckets[i - 1];
         }
     }
 
-    private void sort(int[] buckets, int[] sorted, int n){
-        for(int i = array.length - 1; i >= 0; --i){
-            int digit = (array[i]/n)%10;
+    private void sort(int[] buckets, int[] results, int n) {
+        for (int i = array.length - 1; i >= 0; --i) {
+            int digit = (array[i] / n) % 10;
             int pos = buckets[digit] - 1;
-            sorted[pos] = array[i];
+            results[pos] = array[i];
             buckets[digit] -= 1;
-        }
-    }
-
-    private void copyArray(int[] sorted){
-        for(int i = 0; i< array.length;++i){
-            array[i] = sorted[i];
         }
     }
 }
