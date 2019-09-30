@@ -149,20 +149,23 @@ public class IntArraySorter {
     public void radixSort() {
         int n = 1;
         while (!maxDigitLengthReached) {
-            int[] results = new int[array.length];
-            countSort(results, n);
-            ArrayBuilder.arrayCopy(array, results);
+            countSort(n);
             n *= 10;
         }
     }
 
-    private void countSort(int[] results, int n) {
+    private void countSort(int n) {
         maxDigitLengthReached = true;
+        int[] results = new int[array.length];
         int[] buckets = new int[10];
         count(buckets, n);
         if (!maxDigitLengthReached) {
             sumCount(buckets);
             sort(buckets, results, n);
+            for (int i = 0; i < array.length; ++i) {
+                array[i] = results[i];
+                numSwaps += 1;
+            }
         }
     }
 
@@ -172,6 +175,7 @@ public class IntArraySorter {
             int digit = value % 10;
             if (value > 0) {
                 maxDigitLengthReached = false;
+                numComparisons += 1;
             }
             buckets[digit] += 1;
         }
