@@ -53,7 +53,7 @@ public class IntArraySorterCharts {
             testQuickSortAndStoreResults(shuffleGrade, arrayLength, xAxisValue);
             testRadixSortAndStoreResults(shuffleGrade, arrayLength, xAxisValue);
         }
-        buildLinealCharts("Array length.");
+        buildLinealCharts("Array length");
     }
 
     private void testBubbleSortAndStoreResults(int shuffleGrade, int arrayLength, int XAxisData){
@@ -88,7 +88,6 @@ public class IntArraySorterCharts {
         sorter.radixSort();
         addValues(radixSortSwaps, XAxisData, sorter.getNumSwaps());
         addValues(radixSortComps, XAxisData, sorter.getNumComparisons());
-        System.out.println(array.length + " " + sorter.getNumComparisons() + " " + sorter.getNumSwaps());
     }
 
     private void buildLinealCharts(String xAxisName){

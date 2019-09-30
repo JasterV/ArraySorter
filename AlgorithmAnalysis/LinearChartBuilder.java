@@ -38,6 +38,7 @@ public class LinearChartBuilder {
                                  double[][] selectionSortData,
                                  double[][] qsData,
                                  double[][] rsData) {
+
         DefaultXYDataset dataset = new DefaultXYDataset();
         dataset.addSeries("Bubble sort", bubbleSortData);
         dataset.addSeries("Insertion sort", insertionSortData);
@@ -56,7 +57,7 @@ public class LinearChartBuilder {
 
     private void buildImage(BufferedImage image, String chartTitle){
         try {
-            ImageIO.write(image, "png", new File(chartTitle + ".png"));
+            ImageIO.write(image, "png", new File(chartTitle +".png"));
         } catch (IOException exc) {
             System.out.println("Error creating image.");
         }
