@@ -68,14 +68,14 @@ public class IntArraySorter {
 
     public void selectionSort() {
         for (int i = 0; i < array.length - 1; ++i) {
-            int smallest = i;
+            int lesser = i;
             for (int s = i + 1; s < array.length; ++s) {
-                if (lessThanOrEqual(array[s], array[smallest])) {
-                    smallest = s;
+                if (lessThanOrEqual(array[s], array[lesser])) {
+                    lesser = s;
                 }
             }
-            if (smallest != i) {
-                swap(i, smallest);
+            if (lesser != i) {
+                swap(i, lesser);
             }
         }
     }
