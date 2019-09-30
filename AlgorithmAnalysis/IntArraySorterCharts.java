@@ -53,7 +53,7 @@ public class IntArraySorterCharts {
             testQuickSortAndStoreResults(shuffleGrade, arrayLength, xAxisValue);
             testRadixSortAndStoreResults(shuffleGrade, arrayLength, xAxisValue);
         }
-        buildLinealCharts("Array length");
+        buildLinealCharts("Array length.");
     }
 
     private void testBubbleSortAndStoreResults(int shuffleGrade, int arrayLength, int XAxisData){
