@@ -1,5 +1,5 @@
 /**
- *This class runs the sort algorithms in some ways and plot the results in charts.
+ *This class runs the sort algorithms in some ways to check the efficiency and plot the results in charts.
  */
 public class IntArraySorterCharts {
     private final int xAxisMaxValues = 200;
